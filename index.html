@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vyshtak - save encoding system</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+
+
+    <div class="container_fluid bg-dark">
+        <div class="container py-5">
+
+
+            <h1 class="mb-4 text-warning">
+                Type your text to encode:
+            </h1>
+            <textarea id="encode_text_area" class="w-100 bg-dark text-muted" style="outline: none;"
+                name="encode text area" cols="30" rows="15"></textarea>
+            <div class="encode_button_container pb-4 d-flex justify-content-end">
+                <button id="clear_encode_input_button" class="btn btn-outline-danger me-1">
+                    Clear
+                </button>
+                <button id="encode_button" class="btn btn-warning">
+                    Encode
+                </button>
+            </div>
+            <div class="w-100 text-white">
+                <textarea readonly id="encoded_output_container" class="w-100" name="encoded output container" cols="0"
+                    rows="6"></textarea>
+            </div>
+            <div class="encode_copy_button_container mb-5">
+                <button id="encode_copy_button" class="btn btn-outline-secondary btn-sm">
+                    copy
+                </button>
+            </div>
+
+
+            <h1 class="mb-4 text-warning">
+                Type your text to decode:
+            </h1>
+            <textarea id="decode_text_area" class="w-100 bg-dark text-muted" style="outline: none;"
+                name="decode text area" cols="30" rows="15"></textarea>
+            <div class="decode_button_container pb-4 d-flex justify-content-end">
+                <button id="clear_decode_input_button" class="btn btn-outline-danger me-1">
+                    Clear
+                </button>
+                <button id="decode_button" class="btn btn-warning">
+                    Decode
+                </button>
+            </div>
+            <div class="w-100 text-white">
+                <textarea readonly id="decoded_output_container" class="w-100" name="encoded output container" cols="0"
+                    rows="6"></textarea>
+            </div>
+            <div class="decode_copy_button_container pb-5 border-bottom">
+                <button id="decode_copy_button" class="btn btn-outline-secondary btn-sm">
+                    copy
+                </button>
+            </div>
+
+
+            <div class="about_section pt-5">
+                <h2 class="text-secondary mb-4">
+                    Why actually Vyshtak encodeing system?
+                </h2>
+                <p class="text-secondary">
+                    From time to time, we hear from the media about massive data braches. Modern life in the internet
+                    becomes
+                    more and more dangerous. As more technologies appears in plain sight, as clever scammers and
+                    thieves are.
+                    Vyshtak encoding system provides you functionality, which can be helpful if you want to feel safe
+                    about your information. 
+                    Our encryption is impossible to decipher if you don't own the source code of
+                    this application.
+                    Paste your important text to the "Type your text to encode:" field and get already encoded text back.
+                    Then, if you want to decode your cipher, "Type your text to decode:" field stands for you.
+
+                </p> 
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <script src="main.js"></script>
+</body>
+
+</html>
