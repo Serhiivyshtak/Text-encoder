@@ -8,18 +8,55 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     </head>
-
+    <style>
+        .fill_dark {
+            fill: black;
+        }
+        .fill_light {
+            fill: white;
+        }
+    </style>
 <body>
 
+    <header class="container_fluid bg-dark py-3 border-bottom block_to_change_color">
+        <div class="container d-flex justify-content-between">
+            <a href="https://serhiivyshtak.github.io/Text-encoder/" class="logo text-white fw-bold h3 text-decoration-none text_to_change_color">
+                <span class="text-warning">V</span>system
+            </a>
+            <div class="">
+                <button id="theme_toggle_button" type="button" class="bg-transparent border-none btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                        <path class="fill_light" d="M480-360q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm0 
+                        80q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 
+                        83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 
+                        720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 
+                        97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Zm326-268Z"/>
+                    </svg>
+                </button>
+                <select class="bg-dark text-white border-0 block_to_change_color text_to_change_color" name="languages" id="language_select" style="cursor: pointer;">
+                    <option value="1">
+                        EN
+                    </option>
+                    <option value="2">
+                        DE
+                    </option>
+                    <option value="3">
+                        UA
+                    </option>
+                </select>
+            </div>
+        </div>
+    </header>
 
-    <div class="container_fluid bg-dark">
+
+    <div class="container_fluid bg-dark block_to_change_color">
         <div class="container py-5">
 
 
-            <h1 class="mb-4 text-warning">
+            <h1 class="mb-4 text-white text_to_change_color">
                 Type your text to encode:
             </h1>
-            <textarea id="encode_text_area" class="w-100 bg-dark text-muted" style="outline: none;"
+            <textarea id="encode_text_area" class="w-100 bg-dark text-muted block_to_change_color" style="outline: none;"
                 name="encode text area" cols="30" rows="15"></textarea>
             <div class="encode_button_container pb-4 d-flex justify-content-end">
                 <button id="clear_encode_input_button" class="btn btn-outline-danger me-1">
@@ -40,10 +77,10 @@
             </div>
 
 
-            <h1 class="mb-4 text-warning">
+            <h1 class="mb-4 text-white text_to_change_color">
                 Type your text to decode:
             </h1>
-            <textarea id="decode_text_area" class="w-100 bg-dark text-muted" style="outline: none;"
+            <textarea id="decode_text_area" class="w-100 bg-dark text-muted block_to_change_color" style="outline: none;"
                 name="decode text area" cols="30" rows="15"></textarea>
             <div class="decode_button_container pb-4 d-flex justify-content-end">
                 <button id="clear_decode_input_button" class="btn btn-outline-danger me-1">
