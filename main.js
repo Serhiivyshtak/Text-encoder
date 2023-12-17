@@ -1,4 +1,5 @@
-import {encodeKeyPairs} from './encodekeys.js'
+import {encodeKeyPairs} from './encodekeys.js';
+import {languages} from './translation.js';
 
 class Element {
     static encodeKeys = encodeKeyPairs;
@@ -13,6 +14,7 @@ class Element {
         return document.querySelector(this.selector)
     }
 }
+
 
 class Button extends Element {
     constructor (options) {
@@ -37,56 +39,35 @@ class Button extends Element {
         decodedOutput.HTMLElement.innerText = decodedString;
     }
 
-    clearEncodeInput () {
-        encodeInput.HTMLElement.value = '';
+    clearInput () {
+        const clearButtonIndex = this.HTMLElement.getAttribute('data-clear-button-index');
+        const inputs = [encodeInput, decodeInput];
+        inputs[clearButtonIndex].HTMLElement.value = '';
     }
 
-    clearDecodeInput () {
-        decodeInput.HTMLElement.value = '';
-    }
+    copyOutput () {
+        const copyButtonIndex = this.HTMLElement.getAttribute('data-copy-button-index');
+        const outputs = [encodedOutput, decodedOutput];
+        const languageIndex = +selectLanguage.HTMLElement.value;
 
-    copyEncodedOutput () {
-        if (encodedOutput.HTMLElement.value.trim() == '') {
-            copyEncodedButton.HTMLElement.innerText = 'output is empty';
-            copyEncodedButton.HTMLElement.classList.remove('btn-outline-secondary');
-            copyEncodedButton.HTMLElement.classList.add('btn-outline-danger');
+        if (outputs[copyButtonIndex].HTMLElement.value.trim() == '') {
+            this.HTMLElement.innerText = languages[languageIndex][18];
+            this.HTMLElement.classList.remove('btn-outline-secondary');
+            this.HTMLElement.classList.add('btn-outline-danger');
             setTimeout(() => {
-                copyEncodedButton.HTMLElement.innerText = 'copy';
-                copyEncodedButton.HTMLElement.classList.add('btn-outline-secondary');
-                copyEncodedButton.HTMLElement.classList.remove('btn-outline-danger');
+                this.HTMLElement.innerText = languages[languageIndex][3];
+                this.HTMLElement.classList.add('btn-outline-secondary');
+                this.HTMLElement.classList.remove('btn-outline-danger');
             }, 3000)
         } else {
-            navigator.clipboard.writeText(encodedOutput.HTMLElement.value);
-            copyEncodedButton.HTMLElement.innerText = 'copied';
-            copyEncodedButton.HTMLElement.classList.remove('btn-outline-secondary');
-            copyEncodedButton.HTMLElement.classList.add('btn-outline-success');
+            navigator.clipboard.writeText(outputs[copyButtonIndex].HTMLElement.value);
+            this.HTMLElement.innerText = languages[languageIndex][19];
+            this.HTMLElement.classList.remove('btn-outline-secondary');
+            this.HTMLElement.classList.add('btn-outline-success');
             setTimeout(() => {
-                copyEncodedButton.HTMLElement.innerText = 'copy';
-                copyEncodedButton.HTMLElement.classList.add('btn-outline-secondary');
-                copyEncodedButton.HTMLElement.classList.remove('btn-outline-success');
-            }, 3000)
-        }
-    }
-
-    copyDecodedOutput () {
-        if (decodedOutput.HTMLElement.value.trim() == '') {
-            copyDecodedButton.HTMLElement.innerText = 'output is empty';
-            copyDecodedButton.HTMLElement.classList.remove('btn-outline-secondary');
-            copyDecodedButton.HTMLElement.classList.add('btn-outline-danger');
-            setTimeout(() => {
-                copyDecodedButton.HTMLElement.innerText = 'copy';
-                copyDecodedButton.HTMLElement.classList.add('btn-outline-secondary');
-                copyDecodedButton.HTMLElement.classList.remove('btn-outline-danger');
-            }, 3000)
-        } else {
-            navigator.clipboard.writeText(decodedOutput.HTMLElement.value);
-            copyDecodedButton.HTMLElement.innerText = 'copied';
-            copyDecodedButton.HTMLElement.classList.remove('btn-outline-secondary');
-            copyDecodedButton.HTMLElement.classList.add('btn-outline-success');
-            setTimeout(() => {
-                copyDecodedButton.HTMLElement.innerText = 'copy';
-                copyDecodedButton.HTMLElement.classList.add('btn-outline-secondary');
-                copyDecodedButton.HTMLElement.classList.remove('btn-outline-success');
+                this.HTMLElement.innerText = languages[languageIndex][3];
+                this.HTMLElement.classList.add('btn-outline-secondary');
+                this.HTMLElement.classList.remove('btn-outline-success');
             }, 3000)
         }
     }
@@ -94,6 +75,7 @@ class Button extends Element {
     changeTheme () {
         const blocksToChangeColorTheme = document.querySelectorAll('.block_to_change_color');
         const textToCgangeColorTheme = document.querySelectorAll('.text_to_change_color');
+
         for (let everyBlock of blocksToChangeColorTheme) {
             everyBlock.classList.toggle('bg-dark');
             everyBlock.classList.toggle('bg-light');
@@ -113,13 +95,12 @@ class Select extends Element {
     }
 
     changeLanguage () {
-        let selectValue = Number(selectLanguage.HTMLElement.value);
-        if (selectValue === 1) {
-            console.log('EN');
-        } if (selectValue === 2) {
-            console.log('DE');
-        } if (selectValue === 3) {
-            console.log('UA');
+        let languageIndex = +selectLanguage.HTMLElement.value;
+
+        const itemsToTranslate = document.querySelectorAll('.item_to_translate');
+
+        for (let i = 0; i < itemsToTranslate.length; i++) {
+            itemsToTranslate[i].innerHTML = languages[languageIndex][i];
         }
     }
 }
@@ -145,19 +126,19 @@ document.addEventListener('click', (e) => {
         encodeButton.encode(encodeInput.HTMLElement.value.trim());
     }
     if (e.target === clearEncodeInputButton.HTMLElement) {
-        clearEncodeInputButton.clearEncodeInput();
+        clearEncodeInputButton.clearInput();
     }
     if (e.target === decodeButton.HTMLElement) {
         decodeButton.decode(decodeInput.HTMLElement.value.trim())
     }
     if (e.target === clearDecodeInputButton.HTMLElement) {
-        clearDecodeInputButton.clearDecodeInput();
+        clearDecodeInputButton.clearInput();
     }
     if (e.target === copyEncodedButton.HTMLElement) {
-        copyEncodedButton.copyEncodedOutput();
+        copyEncodedButton.copyOutput();
     } 
     if (e.target === copyDecodedButton.HTMLElement) {
-        copyDecodedButton.copyDecodedOutput();
+        copyDecodedButton.copyOutput();
     }
     if (e.target === themeToggleButton.HTMLElement || e.target === themeToggleButton.HTMLElement.children[0] || e.target === themeToggleButton.HTMLElement.children[0].children[0]) {
         themeToggleButton.changeTheme();
@@ -167,12 +148,3 @@ document.addEventListener('click', (e) => {
 selectLanguage.HTMLElement.addEventListener('change', () => {
     selectLanguage.changeLanguage();
 });
-
-
-// What to improve:
-// 1) Write better text in field "Why actually Vyshtak encodeing system?";
-// 2) Write new field "How to use?";
-// 3) Make optimization of code; 
-// 4) Make header with ability to change the theme and language
-// 5) Make footer with
-

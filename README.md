@@ -1,4 +1,4 @@
-# Vyshtak encoding system
+# Vyshtak encoding tool
 
 ![Static Badge](https://img.shields.io/badge/JavaScript-gray?style=for-the-badge&logo=Javascript)
 ![Static Badge](https://img.shields.io/badge/HTML-gray?style=for-the-badge&logo=html5&logoColor=orange)
